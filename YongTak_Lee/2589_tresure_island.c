@@ -2,6 +2,8 @@
 #define true 1
 #define false 0
 
+int checked[50][50];
+
 int recursive(char map[50][51], int checked[50][50], int height, int width, int j, int k, int count){
   if ( j < 0 || j >= height || k < 0 || k >= width ){
     return 0;

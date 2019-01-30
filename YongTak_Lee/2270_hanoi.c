@@ -4,9 +4,11 @@
 int get_2(int n){
   long long num = 1;
 
-  num = num << n;
-
-  num %= 1000000;
+  do {
+    num = num << n;
+    num %= 1000000;
+    n -= 20;
+  } while ( n > 0 );
 
   return (int)num;
 }
@@ -48,7 +50,13 @@ int main(){
       connection += 1;
     } else {
       if ( connection == 1 ){
-        sum += 1;
+        if ( now == target){
+
+        } else {
+          sum += 1;
+        }
+        
+        sum += get_2(i-1) - 1;
       } else {
         sum += get_2(i) - 1;
       }
