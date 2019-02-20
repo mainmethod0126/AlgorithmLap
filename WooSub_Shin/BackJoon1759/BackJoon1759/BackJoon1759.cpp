@@ -42,9 +42,7 @@ int main()
 
 	sort(vecPassword.begin(), vecPassword.end());
 
-	vecVisitPassword[0] = 1;
 	DFS(0, 0, 0, 0);
-	
 
 	for (int i = 0; i < C; i++)
 	{
@@ -54,26 +52,17 @@ int main()
 
 void DFS(int Index, int nSetCnt, int vowel, int consonant)
 {
-	vecSelPassword[nSetCnt] = vecPassword[Index];
-
-	if (vecPassword[Index] == 'a' || vecPassword[Index] == 'e' || vecPassword[Index] == 'i' || vecPassword[Index] == 'o' || vecPassword[Index] == 'u')
+	// 만약 4개가 다 들어갔다라면 탈출 조건 확인해준다
+	if (nSetCnt == L)
 	{
-		vowel++;
-	}
-	else
-	{
-		consonant++;
-	}
-
-	if (nSetCnt == L - 1)
-	{
+		
 		if (vowel < 1 || consonant < 2 || !(is_sorted(&vecSelPassword[0], &vecSelPassword[L])))
 		{
 			nSetCnt--;
 			return;
 		}
 
-
+		// 모음 자음의 갯수가 조건과 맞고 오름차 순서가 맞다면 출력해준다
 		cout << endl;
 		for (int i = 0; i < L; i++)
 		{
@@ -84,18 +73,35 @@ void DFS(int Index, int nSetCnt, int vowel, int consonant)
 	}
 
 
-
-
-	
-
-
 	for (int i = 0; i < C; i++)
 	{
 		if (vecVisitPassword[i] != 0) continue;
 
+		// 일단 출력할 배열에 현재 선택된 알파벳을 넣는다
+		vecSelPassword[nSetCnt] = vecPassword[i];
+
+		// 선택된 알파벳이 모음인지 자음인지 구분하여 카운팅해준다
+		if (vecSelPassword[nSetCnt] == 'a' || vecSelPassword[nSetCnt] == 'e' || vecSelPassword[nSetCnt] == 'i' || vecSelPassword[nSetCnt] == 'o' || vecSelPassword[nSetCnt] == 'u')
+		{
+			vowel++;
+		}
+		else
+		{
+			consonant++;
+		}
+
 		vecVisitPassword[i] = 1;
 		DFS(i, nSetCnt + 1, vowel, consonant);
 		vecVisitPassword[i] = 0;
+
+		if (vecSelPassword[nSetCnt] == 'a' || vecSelPassword[nSetCnt] == 'e' || vecSelPassword[nSetCnt] == 'i' || vecSelPassword[nSetCnt] == 'o' || vecSelPassword[nSetCnt] == 'u')
+		{
+			vowel--;
+		}
+		else
+		{
+			consonant--;
+		}
 	}
 
 }
