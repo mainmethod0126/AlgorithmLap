@@ -1,4 +1,4 @@
-// ConsoleApplication6.cpp : ÀÌ ÆÄÀÏ¿¡´Â 'main' ÇÔ¼ö°¡ Æ÷ÇÔµË´Ï´Ù. °Å±â¼­ ÇÁ·Î±×·¥ ½ÇÇàÀÌ ½ÃÀÛµÇ°í Á¾·áµË´Ï´Ù.
+// ConsoleApplication6.cpp : ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ 'main' ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÔµË´Ï´ï¿½. ï¿½Å±â¼­ ï¿½ï¿½ï¿½Î±×·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÛµÇ°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ë´Ï´ï¿½.
 //
 
 
@@ -10,21 +10,16 @@ int Temphap;
 
 int Max;
 
-int map[500][500];
+int map[500][500] = {0, };
 int  L, W;
 
 int Long(int i, int j) {
-   
-      
-   
-
    Temphap =  map[i][j] + map[i][j + 1] + map[i][j + 2] + map[i][j + 3];
    if (i < 0 || i >= L || j < 0 || j >= W)
    {
       return Temphap = 0;
    }
-   else
-   if (Temphap > Max)
+   else if (Temphap > Max)
       Max = Temphap;
 
    Temphap = map[i][j] + map[i+1][j] + map[i+2][j] + map[i+3][j];
@@ -32,8 +27,7 @@ int Long(int i, int j) {
    {
       return Temphap = 0;
    }
-   else
-   if (Temphap > Max)
+   else if (Temphap > Max)
       Max = Temphap;
 
 }
@@ -70,7 +64,7 @@ int gun(int i, int j) {
       Max = Temphap;
 
    Temphap = map[i][j] + map[i][j + 1] + map[i][j + 2] + map[i - 1][j + 2];
-   if (i < 0 || i >= L || j < 0 || j >= W)
+   if (i-1 < 0 || i >= L || j < 0 || j >= W)
    {
       return Temphap = 0;
    }
@@ -91,7 +85,7 @@ int gun(int i, int j) {
 int xy(int i, int j) {
 
    Temphap = map[i][j] + map[i + 1][j] + map[i + 1][j + 1] + map[i + 2][j + 1];
-   if (i < 0 || i >= L || j < 0 || j >= W)
+   if (i < 0 || i >= L || j-1 < 0 || j >= W)
    {
       return Temphap = 0;
    }
@@ -100,7 +94,7 @@ int xy(int i, int j) {
       Max = Temphap;
 
    Temphap = map[i][j] + map[i][j + 1] + map[i - 1][j + 1] + map[i - 1][j + 2];
-   if (i < 0 || i >= L || j < 0 || j >= W)
+   if (i-1 < 0 || i >= L || j < 0 || j >= W)
    {
       return Temphap = 0;
    }
@@ -121,7 +115,7 @@ int exceptionF(int i, int j) {
       Max = Temphap;
 
    Temphap = map[i][j] + map[i][j + 1] + map[i-1][j +1] + map[i + 1][j + 1];
-   if (i < 0 || i >= L || j < 0 || j >= W)
+   if (i-1 < 0 || i >= L || j < 0 || j >= W)
    {
       return Temphap = 0;
    }
@@ -130,7 +124,7 @@ int exceptionF(int i, int j) {
       Max = Temphap;
 
    Temphap = map[i][j] + map[i][j + 1] + map[i][j + 2] + map[i -1][j + 1];
-   if (i < 0 || i >= L || j < 0 || j >= W)
+   if (i-1 < 0 || i >= L || j < 0 || j >= W)
    {
       return Temphap = 0;
    }
@@ -152,12 +146,12 @@ int exceptionF(int i, int j) {
 
 int main()
 {
-   cin >> L >> W; // mapÅ©±â ¼³Á¤
+   cin >> L >> W; // mapÅ©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
    for (int i = 0; i < L; i++) {
       for (int j = 0; j < W; j++) {
 
-         cin >> map[i][j];                 // Á¤¼öÀÔ·Â¹Þ±â = ¸Ê ¸¸µé±â 
+         cin >> map[i][j];                 // ï¿½ï¿½ï¿½ï¿½ï¿½Ô·Â¹Þ±ï¿½ = ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       }
    }
 
@@ -169,14 +163,14 @@ int main()
          gun(i, j);
          square(i, j);
          exceptionF(i,j);
-         
+
 
          }
       }
-   
+
    cout << Max << endl;
    return 0;
 
-   
+
 
 }

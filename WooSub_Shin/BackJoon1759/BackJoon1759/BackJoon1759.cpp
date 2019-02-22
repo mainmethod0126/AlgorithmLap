@@ -56,7 +56,7 @@ void DFS(int Index, int nSetCnt, int vowel, int consonant)
 	if (nSetCnt == L)
 	{
 
-		if (vowel < 1 || consonant < 2 || !(is_sorted(&vecSelPassword[0], &vecSelPassword[L])))
+		if (vowel < 1 || consonant < 2)
 		{
 			nSetCnt--;
 			return;
