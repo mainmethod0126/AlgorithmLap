@@ -33,7 +33,7 @@ int main()
 		vecPassword.push_back(cInput);
 		vecVisitPassword.push_back(0);
 	}
-	
+
 	for (int i = 0; i < C; i++)
 	{
 		vecSelPassword.push_back(0);
@@ -44,10 +44,10 @@ int main()
 
 	DFS(0, 0, 0, 0);
 
-	for (int i = 0; i < C; i++)
-	{
-		cout << vecPassword[i];
-	}
+	// for (int i = 0; i < C; i++)
+	// {
+	// 	cout << vecPassword[i];
+	// }
 }
 
 void DFS(int Index, int nSetCnt, int vowel, int consonant)
@@ -55,7 +55,7 @@ void DFS(int Index, int nSetCnt, int vowel, int consonant)
 	// 만약 4개가 다 들어갔다라면 탈출 조건 확인해준다
 	if (nSetCnt == L)
 	{
-		
+
 		if (vowel < 1 || consonant < 2 || !(is_sorted(&vecSelPassword[0], &vecSelPassword[L])))
 		{
 			nSetCnt--;
@@ -63,11 +63,12 @@ void DFS(int Index, int nSetCnt, int vowel, int consonant)
 		}
 
 		// 모음 자음의 갯수가 조건과 맞고 오름차 순서가 맞다면 출력해준다
-		cout << endl;
+
 		for (int i = 0; i < L; i++)
 		{
 			cout << vecSelPassword[i];
 		}
+		cout << endl;
 		nSetCnt--;
 		return;
 	}
@@ -76,11 +77,16 @@ void DFS(int Index, int nSetCnt, int vowel, int consonant)
 	for (int i = 0; i < C; i++)
 	{
 		if (vecVisitPassword[i] != 0) continue;
-
 		// 일단 출력할 배열에 현재 선택된 알파벳을 넣는다
-		vecSelPassword[nSetCnt] = vecPassword[i];
 
-		// 선택된 알파벳이 모음인지 자음인지 구분하여 카운팅해준다
+		if ( nSetCnt > 0 ) {
+			if ( vecSelPassword[nSetCnt-1] > vecPassword[i] ){
+				continue;
+			}
+		}
+		// 선택된 마지막 알파벳보다 작은 알파벳이 들어오는 경우는 제외한다.
+
+		vecSelPassword[nSetCnt] = vecPassword[i];
 		if (vecSelPassword[nSetCnt] == 'a' || vecSelPassword[nSetCnt] == 'e' || vecSelPassword[nSetCnt] == 'i' || vecSelPassword[nSetCnt] == 'o' || vecSelPassword[nSetCnt] == 'u')
 		{
 			vowel++;
@@ -90,6 +96,7 @@ void DFS(int Index, int nSetCnt, int vowel, int consonant)
 			consonant++;
 		}
 
+		// 선택된 알파벳이 모음인지 자음인지 구분하여 카운팅해준다
 		vecVisitPassword[i] = 1;
 		DFS(i, nSetCnt + 1, vowel, consonant);
 		vecVisitPassword[i] = 0;
@@ -102,6 +109,7 @@ void DFS(int Index, int nSetCnt, int vowel, int consonant)
 		{
 			consonant--;
 		}
+
 	}
 
 }
@@ -109,7 +117,7 @@ void DFS(int Index, int nSetCnt, int vowel, int consonant)
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
 // 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
 
-// 시작을 위한 팁: 
+// 시작을 위한 팁:
 //   1. [솔루션 탐색기] 창을 사용하여 파일을 추가/관리합니다.
 //   2. [팀 탐색기] 창을 사용하여 소스 제어에 연결합니다.
 //   3. [출력] 창을 사용하여 빌드 출력 및 기타 메시지를 확인합니다.
